@@ -14,7 +14,7 @@ exp:
   build: exp
   restart: always
   ports:
-    - "8080:8080"
+    - "1337:1337"
   volumes_from:
     - "storage"
   log_driver: "json-file"
