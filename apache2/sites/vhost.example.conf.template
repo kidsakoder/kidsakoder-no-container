@@ -1,0 +1,23 @@
+<VirtualHost *:80>
+
+	ServerName SITE_HOSTNAME
+	ServerAlias www.SITE_HOSTNAME
+
+	DocumentRoot /var/www/html/
+
+	ProxyRequests Off
+	ProxyPreserveHost On
+
+	ProxyPass /admin/event ws://exp:8080/admin/event
+	ProxyPassReverse /admin/event ws://exp:8080/admin/event
+	ProxyPass / http://exp:8080/
+	ProxyPassReverse / http://exp:8080/
+
+
+	RewriteEngine on
+	RewriteCond %{HTTP_HOST} !^SITE_HOSTNAME_ESCAPED$
+	RewriteCond %{HTTP_HOST} !^$
+	RewriteRule ^/(.*) http://SITE_HOSTNAME/$1 [L,R]
+
+</VirtualHost>
+

@@ -1,0 +1,34 @@
+apache2:
+  build: apache2
+  hostname: localhost
+  restart: always
+  ports:
+    - "80:80"
+  log_driver: "json-file"
+  log_opt:
+    max-size: "300M"
+    max-file: "1"
+  links:
+    - exp
+exp:
+  build: exp
+  restart: always
+  ports:
+    - "8080:8080"
+  volumes_from:
+    - "storage"
+  log_driver: "json-file"
+  log_opt:
+    max-size: "300M"
+    max-file: "1"
+  links:
+    - mail
+  labels:
+    io.enonic.backup.prescripts: "/usr/local/bin/backup.sh su password"
+    io.enonic.backup.data: "/enonic-xp/home/snapshots,/enonic-xp/home/repo"
+storage:
+  build: storage
+mail:
+  image: enoniccloud/postfix
+  hostname: localhost
+  restart: always
