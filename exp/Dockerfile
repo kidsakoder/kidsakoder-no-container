@@ -1,4 +1,4 @@
-FROM enonic/xp-app:6.11.0
+FROM enonic/xp-app:6.13.1
 ENV JAVA_OPTS "-Xms2048M -Xmx2048M -XX:+UseConcMarkSweepGC -XX:+CMSParallelRemarkEnabled -XX:+UseCMSInitiatingOccupancyOnly -XX:CMSInitiatingOccupancyFraction=60 -XX:+ScavengeBeforeFullGC -XX:+CMSScavengeBeforeRemark -Djsse.enableSNIExtension=true"
 
 # Set Memory settings
